@@ -41,15 +41,18 @@ async function main() {
   const action = getAction(selected, platform)
   const configuration = getConfiguration()
   const warningsAsErrors = core.getBooleanInput('warnings-as-errors')
+  const useGenerateXcodeproj: booean = core.getBooleanInput('use-generate-xcodeproj')
   const destination = await getDestination(selected, platform)
   const identity = getIdentity(core.getInput('code-sign-identity'), platform)
   const xcpretty = verbosity() == 'xcpretty'
 
   core.info(`» Selected Xcode ${selected}`)
 
-  const reason: string | false = shouldGenerateXcodeproj()
-  if (reason) {
-    generateXcodeproj(reason)
+  if (useGenerateXcodeproj) {
+    const reason: string | false = shouldGenerateXcodeproj()
+    if (reason) {
+      generateXcodeproj(reason)
+    }
   }
 
   const apiKey = await getAppStoreConnectApiKey()
