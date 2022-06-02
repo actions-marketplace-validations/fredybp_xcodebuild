@@ -1,4 +1,4 @@
-name: mxcl/Xcodebuild
+name: fredybp/Xcodebuild
 author: Max Howell
 description: >
   A continuously resilient `xcodebuild` action.
@@ -113,6 +113,11 @@ inputs:
       Consider `always` if you want access to your coverage-reports.
       Beware that artifacts count against your GitHub Actions storage limits.
     default: on-failure
+    required: false
+  use-generate-xcodeproj:
+    description: |
+      Uses `swift package generate-xcodeproj` to generate `.xcproject` file (will be debrecated as Xcode can build from a `Package.swift`).
+    default: false
     required: false
 runs:
   using: 'node16'
